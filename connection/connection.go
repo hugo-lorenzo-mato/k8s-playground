@@ -1,14 +1,12 @@
 package connection
 
 import (
-	"bytes"
 	"errors"
 	"fmt"
-	"github.com/ghodss/yaml"
 	log "github.com/sirupsen/logrus"
 	"github.com/tidwall/gjson"
+	fileUtil "k8s-playground/util/file"
 	"k8s.io/client-go/rest"
-	"os"
 )
 
 type ConnectionInfo struct {
@@ -31,26 +29,6 @@ func createTlsConfig(insecure bool, caFilePath string) rest.TLSClientConfig {
 	}
 }
 
-func yamlInput2Json(fp string) ([]byte, error) {
-	inputFile, err := os.Open(fp)
-	defer inputFile.Close()
-	if err != nil {
-		return nil, fmt.Errorf("Error reading: %s. err: %s", fp, err)
-	}
-
-	buf := new(bytes.Buffer)
-	_, err = buf.ReadFrom(inputFile)
-	if err != nil {
-		return nil, fmt.Errorf("Error reading input: %s. err: %s", fp, err)
-	}
-	content := buf.Bytes()
-	converted2Json, err := yaml.YAMLToJSON(content)
-	if err != nil {
-		return nil, fmt.Errorf("Error in yaml conversion: %s", err)
-	}
-	return converted2Json, nil
-}
-
 func getConfig(ptd ConnectionInfo) (*rest.Config, error) {
 	log.Debug("getConfig started")
 	bearer, err := getBearerToken(ptd.Username, ptd.Password, ptd.Host)
@@ -69,7 +47,7 @@ func getConfig(ptd ConnectionInfo) (*rest.Config, error) {
 
 func getInfo(path, platform, supraenv string) (ConnectionInfo, error) {
 	log.Debug("- getInfo started -")
-	json, err := yamlInput2Json(path)
+	json, err := fileUtil.YamlInput2Json(path)
 	if err != nil {
 		return ConnectionInfo{}, err
 	}

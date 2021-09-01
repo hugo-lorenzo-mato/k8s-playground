@@ -26,7 +26,9 @@ it grows.
    1. [networkpolicy](#networkpolicy)  
       1. [backupAll](#backupAll)  
    1. [route](#route)  
-      1. [route](#getNamespace)  
+      1. [getNamespace](#getNamespace)    
+   1. [cluster](#cluster)  
+      1. [getNamespace](#login)  
 1. [Changelog](#changelog)  
 
 ## Usage <a name="usage"></a>
@@ -216,7 +218,7 @@ INFO[0116] Cli Command Execution took 1m56.572868891s
 
 #### route <a name="route"></a>
 
-##### getNamespace a name="getNamespace"></a>
+##### getNamespace <a name="getNamespace"></a>
 
 Given a host and a path, prints the namespace/project name where route is applied. As I show in the example, it can be 
 useful to find duplicate routes in the cluster.
@@ -269,7 +271,99 @@ INFO[0116] -> Number of projects analyzed: 590. Total number of Routes processed
 INFO[0116] Cli Command Execution took 1m56.517531912s 
 ```
 
+#### Cluster <a name="cluster"></a>
+
+##### Login <a name="login"></a>
+
+The login command converts the connection data from data/cluster.yml into the command needed to login to the different 
+clusters.
+
+```shell
+PS [..]\GolandProjects\k8s-playground> .\k8s-playground.exe cluster login
+
+██╗  ██╗ █████╗ ███████╗      ██████╗ ██╗      █████╗ ██╗   ██╗ ██████╗ ██████╗  ██████╗ ██╗   ██╗███╗   ██╗██████╗
+██║ ██╔╝██╔══██╗██╔════╝      ██╔══██╗██║     ██╔══██╗╚██╗ ██╔╝██╔════╝ ██╔══██╗██╔═══██╗██║   ██║████╗  ██║██╔══██╗
+█████╔╝ ╚█████╔╝███████╗█████╗██████╔╝██║     ███████║ ╚████╔╝ ██║  ███╗██████╔╝██║   ██║██║   ██║██╔██╗ ██║██║  ██║
+██╔═██╗ ██╔══██╗╚════██║╚════╝██╔═══╝ ██║     ██╔══██║  ╚██╔╝  ██║   ██║██╔══██╗██║   ██║██║   ██║██║╚██╗██║██║  ██║
+██║  ██╗╚█████╔╝███████║      ██║     ███████╗██║  ██║   ██║   ╚██████╔╝██║  ██║╚██████╔╝╚██████╔╝██║ ╚████║██████╔╝
+╚═╝  ╚═╝ ╚════╝ ╚══════╝      ╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝╚═════╝
+                                                                                                   Version-0.3.0
++------------------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+SUPRAENVIRONMENT        CLUSTER                 LOGIN
++------------------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+| des              | micluster1          | oc login --insecure-skip-tls-verify --username xxxxxxxxxxxxxxxx --password xxxxxxxxxxxx micluster.com:443                               |
++                  +---------------------+                                                                                                                                         +
+|                  | micluster2          |                                                                                                                                         |
++                  +---------------------+                                                                                                                                         +
+|                  | micluster3          |                                                                                                                                         |
++                  +---------------------+                                                                                                                                         +
+|                  | micluster4          |                                                                                                                                         |
++                  +---------------------+                                                                                                                                         +
+|                  | micluster5          |                                                                                                                                         |
++                  +---------------------+                                                                                                                                         +
+|                  | micluster6          |                                                                                                                                         |
++                  +---------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+|                  | micluster7          | oc login --insecure-skip-tls-verify --username xxxxxxxxxxxxxxxx --password xxxxxxxxxxxx micluster.com:443                               |
++------------------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+| pre              | micluster1          | oc login --insecure-skip-tls-verify --username xxxxxxxxxxxxxxxx --password xxxxxxxxxxxxxxxx micluster.com:443                           |
++                  +---------------------+                                                                                                                                         +
+|                  | micluster2          |                                                                                                                                         |
++                  +---------------------+                                                                                                                                         +
+|                  | micluster3          |                                                                                                                                         |
++                  +---------------------+                                                                                                                                         +
+|                  | micluster4          |                                                                                                                                         |
++                  +---------------------+                                                                                                                                         +
+|                  | micluster5          |                                                                                                                                         |
++                  +---------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+|                  | micluster6          | oc login --insecure-skip-tls-verify --username xxxxxxxxxxxxxxxx --password xxxxxxxxxxxxxxxx micluster.com:443                           |
++                  +---------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+|                  | micluster7          | oc login --insecure-skip-tls-verify --username xxxxxxxxxxxxxxxx --password xxxxxxxxxxxxxxxx micluster.com:443                           |
++                  +---------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+|                  | micluster8          | oc login --insecure-skip-tls-verify --username xxxxxxxxxxxxx --password xxxxxxxxxxxxx micluster.com:443                                 |
++                  +---------------------+                                                                                                                                         +
+|                  | micluster9          |                                                                                                                                         |
++------------------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+| pro              | micluster1          | oc login --insecure-skip-tls-verify --username xxxxxxxxxxxxx --password xxxxxxxxxxxxx micluster.com:443                                 |
++                  +---------------------+                                                                                                                                         +
+|                  | micluster2          |                                                                                                                                         |
++                  +---------------------+                                                                                                                                         +
+|                  | micluster3          |                                                                                                                                         |
++                  +---------------------+                                                                                                                                         +
+|                  | micluster4          |                                                                                                                                         |
++                  +---------------------+                                                                                                                                         +
+|                  | micluster5          |                                                                                                                                         |
++                  +---------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+|                  | micluster6          | oc login --insecure-skip-tls-verify --username xxxxxxxxxxxxx --password xxxxxxxxxxxxx micluster.com:443                                 |
++                  +---------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+|                  | micluster7          | oc login --insecure-skip-tls-verify --username xxxxxxxxxxxxx --password xxxxxxxxxxxxx micluster.com:443                                 |
++                  +---------------------+                                                                                                                                         +
+|                  | micluster7          |                                                                                                                                         |
++                  +---------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+|                  | micluster8          | oc login --insecure-skip-tls-verify --username xxxxxxxxxxxxx --password xxxxxxxxxxxxx micluster.com:443                                 |
++                  +---------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+|                  | micluster9          | oc login --insecure-skip-tls-verify --username xxxxxxxxxxxxx --password xxxxxxxxxxxxx micluster.com:443                                 |
++                  +---------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+|                  | micluster10         | oc login --insecure-skip-tls-verify --username xxxxxxxxxxxxx --password xxxxxxxxxxxxx micluster.com:443                                 |
++                  +---------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+|                  | micluster11         | oc login --insecure-skip-tls-verify --username xxxxxxxxxxxxx --password xxxxxxxxxxxxx micluster.com:443                                 |
++                  +---------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+|                  | micluster12         | oc login --insecure-skip-tls-verify --username xxxxxxxxxxxxx --password xxxxxxxxxxxxx micluster.com:443                                 |
++                  +---------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+|                  | micluster13         | oc login --insecure-skip-tls-verify --username xxxxxxxxxxxxx --password xxxxxxxxxxxxx micluster.com:443                                 |
++                  +---------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+|                  | micluster14         | oc login --insecure-skip-tls-verify --username xxxxxxxxxxxxx --password xxxxxxxxxxxxx micluster.com:443                                 |
++                  +---------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+|                  | micluster15         | oc login --insecure-skip-tls-verify --username xxxxxxxxxxxxx --password xxxxxxxxxxxxx micluster.com:443                                 |
++                  +---------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+|                  | micluster16         | oc login --insecure-skip-tls-verify --username xxxxxxxxxxxxx --password xxxxxxxxxxxxx micluster.com:443                                 |
++------------------+---------------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+```
+
 ## Changelog <a name="changelog"></a>
+
+### v.0.4.0
+
+- Add cluster login new command: `k8s-playground cluster login`.
 
 ### v.0.3.0
 

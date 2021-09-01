@@ -5,10 +5,8 @@ import (
 	"github.com/urfave/cli/v2"
 	"k8s-playground/cmd"
 	"k8s-playground/conf"
-	timeUtil "k8s-playground/util/time"
 	"k8s-playground/util/version"
 	"os"
-	"time"
 )
 
 var debug bool
@@ -38,7 +36,7 @@ func init() {
 }
 
 func main() {
-	defer timeUtil.FromStart(time.Now(), "Cli Command Execution")
+	//defer timeUtil.FromStart(time.Now(), "Cli Command Execution")
 	version.Lookup()
 	app := cli.NewApp()
 	app.Version = conf.VERSION
